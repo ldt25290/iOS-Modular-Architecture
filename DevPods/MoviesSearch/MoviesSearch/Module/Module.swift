@@ -11,10 +11,12 @@ import Networking
 public struct ModuleDependencies {
     let apiDataTransferService: DataTransferService
     let imageDataTransferService: DataTransferService
+    weak var chatPresenter: ChatPresenter?
     
-    public init (apiDataTransferService: DataTransferService, imageDataTransferService: DataTransferService) {
+  public init (apiDataTransferService: DataTransferService, imageDataTransferService: DataTransferService, chatPresenter: ChatPresenter? = nil) {
         self.apiDataTransferService = apiDataTransferService
         self.imageDataTransferService = imageDataTransferService
+        self.chatPresenter = chatPresenter
     }
 }
 
@@ -34,6 +36,6 @@ public struct Module {
 
 // Note: We can create ChatPresenter Interface and add it to ModuleDependencies if we want to delegate
 // Chat feature to App and avoid dependency on Chat module from this module(same can be done by using closure)
-public protocol ChatPresenter {
+public protocol ChatPresenter: AnyObject{
     func openChatForUser(inView: UIViewController)
 }

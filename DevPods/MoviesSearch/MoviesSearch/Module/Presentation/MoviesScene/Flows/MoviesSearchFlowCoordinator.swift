@@ -9,8 +9,9 @@ import UIKit
 
 protocol MoviesSearchFlowCoordinatorDependencies  {
     func makeMoviesListViewController(closures: MoviesListViewModelClosures) -> MoviesListViewController
-    func makeMoviesDetailsViewController(movie: Movie) -> UIViewController
+    func makeMoviesDetailsViewController(movie: Movie, closures: MovieDetailsViewModelClosures) -> UIViewController
     func makeMoviesQueriesSuggestionsListViewController(didSelect: @escaping MoviesQueryListViewModelDidSelectClosure) -> UIViewController
+    func openChatModule(viewController: UIViewController)
 }
 
 class MoviesSearchFlowCoordinator {
@@ -20,6 +21,7 @@ class MoviesSearchFlowCoordinator {
 
     private weak var moviesListVC: MoviesListViewController?
     private weak var moviesQueriesSuggestionsVC: UIViewController?
+    private weak var movieDetailVC: UIViewController?
 
     init(navigationController: UINavigationController,
          dependencies: MoviesSearchFlowCoordinatorDependencies) {
@@ -39,7 +41,9 @@ class MoviesSearchFlowCoordinator {
     }
 
     private func showMovieDetails(movie: Movie) {
-        let vc = dependencies.makeMoviesDetailsViewController(movie: movie)
+        let closures = MovieDetailsViewModelClosures(openChatScreen: openChatModule)
+        let vc = dependencies.makeMoviesDetailsViewController(movie: movie, closures: closures)
+        movieDetailVC = vc
         navigationController?.pushViewController(vc, animated: true)
     }
 
@@ -58,5 +62,12 @@ class MoviesSearchFlowCoordinator {
         moviesQueriesSuggestionsVC?.remove()
         moviesQueriesSuggestionsVC = nil
         moviesListVC?.suggestionsListContainer.isHidden = true
+    }
+  
+    private func openChatModule() {
+      guard let viewController = movieDetailVC else {
+        return
+      }
+      dependencies.openChatModule(viewController: viewController)
     }
 }

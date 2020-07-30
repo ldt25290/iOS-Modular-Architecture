@@ -8,8 +8,13 @@
 
 import Foundation
 
+struct MovieDetailsViewModelClosures {
+    let openChatScreen: () -> Void
+}
+
 protocol MovieDetailsViewModelInput {
     func updatePosterImage(width: Int)
+    func openChatScreen()
 }
 
 protocol MovieDetailsViewModelOutput {
@@ -26,6 +31,7 @@ final class DefaultMovieDetailsViewModel: MovieDetailsViewModel {
     private let posterImagePath: String?
     private let posterImagesRepository: PosterImagesRepository
     private var imageLoadTask: Cancellable? { willSet { imageLoadTask?.cancel() } }
+    private let closures: MovieDetailsViewModelClosures
 
     // MARK: - OUTPUT
     let title: String
@@ -34,12 +40,13 @@ final class DefaultMovieDetailsViewModel: MovieDetailsViewModel {
     let overview: String
 
     init(movie: Movie,
-         posterImagesRepository: PosterImagesRepository) {
+         posterImagesRepository: PosterImagesRepository, closures: MovieDetailsViewModelClosures) {
         self.title = movie.title ?? ""
         self.overview = movie.overview ?? ""
         self.posterImagePath = movie.posterPath
         self.isPosterImageHidden = movie.posterPath == nil
         self.posterImagesRepository = posterImagesRepository
+        self.closures = closures
     }
 }
 
@@ -59,4 +66,9 @@ extension DefaultMovieDetailsViewModel {
             self.imageLoadTask = nil
         }
     }
+  
+    func openChatScreen() {
+      self.closures.openChatScreen()
+    }
+    
 }

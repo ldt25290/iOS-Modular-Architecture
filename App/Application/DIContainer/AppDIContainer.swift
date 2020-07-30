@@ -8,16 +8,25 @@
 import Networking
 import Authentication
 import MoviesSearch
+import ChatModule
 
 final class AppDIContainer {
     
     lazy var appConfiguration = AppConfiguration()
     
     // MARK: - Feature Modules
-    func makeMoviesSearchModule() -> MoviesSearch.Module {
+    func makeMoviesSearchModule(chatPresenter: ChatPresenter) -> MoviesSearch.Module {
         let dependencies = MoviesSearch.ModuleDependencies(apiDataTransferService: apiDataTransferService,
-                                                           imageDataTransferService: imageDataTransferService)
+                                                           imageDataTransferService: imageDataTransferService,
+                                                           chatPresenter: chatPresenter)
         return MoviesSearch.Module(dependencies: dependencies)
+    }
+  
+  
+    func makeChatModule() -> ChatModule.Module {
+        let dependencies = ChatModule.ModuleDependencies(apiDataTransferService: apiDataTransferService,
+                                                           imageDataTransferService: imageDataTransferService)
+        return ChatModule.Module(dependencies: dependencies)
     }
     
     // MARK: - Network
@@ -37,6 +46,7 @@ final class AppDIContainer {
                                                       sessionManager: sessionManager)
         return DefaultDataTransferService(with: imagesDataNetwork)
     }()
+    
 }
 
 // MARK: - Authentication conformance to Networking Service Protocols

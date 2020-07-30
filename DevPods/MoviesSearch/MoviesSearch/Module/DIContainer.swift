@@ -56,13 +56,13 @@ final class DIContainer {
     }
     
     // MARK: - Movie Details
-    func makeMoviesDetailsViewController(movie: Movie) -> UIViewController {
-        return MovieDetailsViewController.create(with: makeMoviesDetailsViewModel(movie: movie))
+    func makeMoviesDetailsViewController(movie: Movie, closures: MovieDetailsViewModelClosures) -> UIViewController {
+      return MovieDetailsViewController.create(with: makeMoviesDetailsViewModel(movie: movie, closures: closures))
     }
 
-    func makeMoviesDetailsViewModel(movie: Movie) -> MovieDetailsViewModel {
+    func makeMoviesDetailsViewModel(movie: Movie, closures: MovieDetailsViewModelClosures) -> MovieDetailsViewModel {
         return DefaultMovieDetailsViewModel(movie: movie,
-                                            posterImagesRepository: makePosterImagesRepository())
+                                            posterImagesRepository: makePosterImagesRepository(), closures: closures)
     }
     
     // MARK: - Movies Queries Suggestions List
@@ -93,4 +93,8 @@ final class DIContainer {
     }
 }
 
-extension DIContainer: MoviesSearchFlowCoordinatorDependencies {}
+extension DIContainer: MoviesSearchFlowCoordinatorDependencies {
+  func openChatModule(viewController: UIViewController) {
+    self.dependencies.chatPresenter?.openChatForUser(inView: viewController)
+  }
+}

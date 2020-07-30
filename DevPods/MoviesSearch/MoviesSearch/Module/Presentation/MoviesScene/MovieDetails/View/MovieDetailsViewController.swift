@@ -37,7 +37,9 @@ final class MovieDetailsViewController: UIViewController, StoryboardInstantiable
         super.viewDidLayoutSubviews()
         viewModel.updatePosterImage(width: Int(posterImageView.imageSizeAfterAspectFit.scaledSize.width))
     }
-
+    
+  
+  
     // MARK: - Private
 
     private func setupViews() {
@@ -45,5 +47,11 @@ final class MovieDetailsViewController: UIViewController, StoryboardInstantiable
         overviewTextView.text = viewModel.overview
         posterImageView.isHidden = viewModel.isPosterImageHidden
         view.accessibilityIdentifier = AccessibilityIdentifier.movieDetailsView
+        let button1 = UIBarButtonItem(title: "Chat", style: .done, target: self, action: #selector(chatActionEvent)) // action:#selector(Class.MethodName) for swift 3
+        self.navigationItem.rightBarButtonItem  = button1
+    }
+  
+    @objc private func chatActionEvent() {
+      viewModel.openChatScreen()
     }
 }

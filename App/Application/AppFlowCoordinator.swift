@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import MoviesSearch
+import ChatModule
 
 class AppFlowCoordinator {
 
@@ -22,7 +24,21 @@ class AppFlowCoordinator {
         guard let navigationController = navigationController else { return }
 
         // In App Flow we can check if user needs to login, if yes we would run login flow
-        let moviesSearchModule = appDIContainer.makeMoviesSearchModule()
+        let moviesSearchModule = appDIContainer.makeMoviesSearchModule(chatPresenter: self)
         moviesSearchModule.startMoviesSearchFlow(in: navigationController)
     }
+  
+    private func startChatModule(in viewController: UIViewController? = nil) {
+      guard let navigationController = navigationController else { return }
+
+      // In App Flow we can check if user needs to login, if yes we would run login flow
+      let chatModule = appDIContainer.makeChatModule()
+      chatModule.startChatFlow(in: navigationController, in: viewController)
+    }
+}
+
+extension AppFlowCoordinator: ChatPresenter {
+  func openChatForUser(inView: UIViewController) {
+    self.startChatModule(in: inView)
+  }
 }
