@@ -4,7 +4,7 @@ workspace 'App.xcworkspace'
 project 'App.xcodeproj'
 
 def networking_pod
-  pod 'Networking', :path => 'DevPods/Networking', :testspecs => ['Tests'] 
+  pod 'Networking', :path => 'DevPods/Networking', :testspecs => ['Tests']
 end
 
 def authentication_pod
@@ -15,10 +15,15 @@ def movies_search_pod
   pod 'MoviesSearch', :path => 'DevPods/MoviesSearch', :testspecs => ['Tests']
 end
 
+def chat_module_pod
+  pod 'ChatModule', :path => 'DevPods/ChatModule'
+end
+
 def development_pods
   networking_pod
   authentication_pod
   movies_search_pod
+  chat_module_pod
 end
 
 target 'App' do
@@ -54,3 +59,10 @@ target 'MoviesSearch_Example' do
   
   movies_search_pod
 end
+
+target 'ChatModule_Example' do
+   use_frameworks!
+   project 'DevPods/ChatModule/Example/ChatModule.xcodeproj'
+   
+   chat_module_pod
+ end

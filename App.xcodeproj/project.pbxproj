@@ -290,6 +290,7 @@
 				"${PODS_ROOT}/Target Support Files/Pods-AppUITests/Pods-AppUITests-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Authentication/Authentication.framework",
+				"${BUILT_PRODUCTS_DIR}/ChatModule/ChatModule.framework",
 				"${BUILT_PRODUCTS_DIR}/MoviesSearch/MoviesSearch.framework",
 				"${BUILT_PRODUCTS_DIR}/Networking/Networking.framework",
 			);
@@ -297,6 +298,7 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Authentication.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ChatModule.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MoviesSearch.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Networking.framework",
 			);
@@ -358,6 +360,7 @@
 				"${PODS_ROOT}/Target Support Files/Pods-App/Pods-App-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Authentication/Authentication.framework",
+				"${BUILT_PRODUCTS_DIR}/ChatModule/ChatModule.framework",
 				"${BUILT_PRODUCTS_DIR}/MoviesSearch/MoviesSearch.framework",
 				"${BUILT_PRODUCTS_DIR}/Networking/Networking.framework",
 			);
@@ -365,6 +368,7 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Authentication.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ChatModule.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MoviesSearch.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Networking.framework",
 			);
